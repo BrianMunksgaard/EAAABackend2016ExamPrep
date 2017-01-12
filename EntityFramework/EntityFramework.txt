@@ -1,0 +1,47 @@
+
+1) Entity framework is an ORM (object-relational mapper) that enables us to connect to the DB (SQL server)
+and map DB to our models and vice versa.
+2) One of the core capabilities of the Entity Framework is generation of SELECT, UPDATE, INSERT and DELETE commands.
+3) The Entity Framework lets developers express queries against the model rather than concern themselves with
+details of the database.
+
+Application -> Entity Framework -> ADO.NET -> SQL Database ->
+
+
+4) Application uses linq queries to "talk" with entity framework (through DbContext class)
+5) Application design strategies: Domain Driven (code first) or Data Driven (code first with existing database)
+
+6) System.Data.Entity.DbContext (represents database session). Primary class for working with data.
+
+7) In nuget package manager console: Install-Package EntityFramework
+8) Add connection string to web.config:
+	<connectionStrings>
+		<add name="ExamContext" 
+		connectionString="Data Source=(localdb)\v11.0; Integrated Security=True; AttachDbFilename=|DataDirectory|ExamDB.mdf"
+		providerName="System.Data.SqlClient" />
+	</connectionStrings>
+9) Inherit DbContext in application DAL folder.
+	/// <summary>
+    /// Database context for the application.
+    /// </summary>
+    public class ExamContext : DbContext
+    {
+         /// <summary>
+        /// Context constructor.
+        /// </summary>
+        public ExamContext() : base("ExamContext") { } // ExamContext in web.config.
+
+        /// <summary>
+        /// Students data.
+        /// </summary>
+        public DbSet<Student> Students { get; set; }
+        
+        /// <summary>
+        /// Courses data.
+        /// </summary>
+        public DbSet<Course> Courses { get; set; }
+    }
+
+
+
+15) Fluent API.
