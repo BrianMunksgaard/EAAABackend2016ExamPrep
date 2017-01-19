@@ -3,3 +3,5 @@
 /EntityFramework/CodeFirst/CodeFirst/App_Data
 /RestAndWebApi/Code/CodeFirst/bin
 /RestAndWebApi/Code/CodeFirst/obj
+/EntityFramework/CodeFirstEFMigration/CodeFirst/obj
+/EntityFramework/CodeFirstEFMigration/CodeFirst/bin

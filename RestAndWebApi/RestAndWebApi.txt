@@ -54,3 +54,12 @@ WebApi/Rest
    
 3) Compliance with REST constraints allows: Scalability, Simplicity, Modifiability, Visibility, Portability, Reliability.
 
+4) Return content: JSON, XML. Specify the type in the header.
+
+5) DTO (Data Transfer Object).
+	Remove circular references (as in our case).
+	Hide particular properties that clients are not supposed to view.
+	Omit some properties in order to reduce payload size.
+	Flatten object graphs that contain nested objects, to make them more convenient for clients.
+	Avoid “over-posting” vulnerabilities.
+	Decouple your service layer from your database layer.

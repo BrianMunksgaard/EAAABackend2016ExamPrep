@@ -125,6 +125,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ExamDB.mdf" />
+    <Content Include="App_Data\ExamDB_log.ldf">
+      <DependentUpon>ExamDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -153,6 +157,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701191316412_InitialCreate.cs" />
+    <Compile Include="Migrations\201701191316412_InitialCreate.Designer.cs">
+      <DependentUpon>201701191316412_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701191341073_AddedStudentBirthdayProperty.cs" />
+    <Compile Include="Migrations\201701191341073_AddedStudentBirthdayProperty.Designer.cs">
+      <DependentUpon>201701191341073_AddedStudentBirthdayProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -178,8 +191,14 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <EmbeddedResource Include="Migrations\201701191316412_InitialCreate.resx">
+      <DependentUpon>201701191316412_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701191341073_AddedStudentBirthdayProperty.resx">
+      <DependentUpon>201701191341073_AddedStudentBirthdayProperty.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
