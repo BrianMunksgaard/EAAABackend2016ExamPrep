@@ -1,0 +1,56 @@
+WebApi/Rest
+
+1) REST = REpresentational State Transfer. Rest is the architectural principles by which you can design Web services.
+   Introduced in 2000 by Roy Fielding at the University of California.
+   Today REST has mostly displaced SOAP- and WSDL-based interface design because it's simpler to use.
+   
+2) Reource based.
+   Representations.
+   Six constraints (Uniform interface, stateless, client server, cacheable, layered system, code on demand)
+   
+    Uniform interface: URIs are used to identify resources.
+                      Defines the interface between client and server.
+					  Simplifies and decouples the architecture between client and server
+					  For most web-based RESTfull services it means: HTTP verbs (GET, PUT, POST, DELETE)
+					  URI (resource name, i.e. http://localhost:9264/bookservice/1)
+					  HTTP response (status, body
+   
+	  Identification of resources:
+		Individual resources are identified in requests, for example using URIs in Web-based REST systems.
+		The resources themselves are conceptually separate from the representations that are returned to the client.
+		For example, the server may send data from its database as HTML, XML or JSON, none of which are the server's
+		internal representation.
+		
+	  Manipulation of resources through representations
+		When a client holds a representation of a resource, including any metadata attached,
+		it has enough information to modify or delete the resource.
+
+	  Self-descriptive messages
+		Each message includes enough information to describe how to process the message.
+		For example, which parser to invoke may be specified by an Internet media type
+		(previously known as a MIME type).
+
+	  Hypermedia as the engine of application state (HATEOAS):
+		Having accessed an initial URI for the REST application—analogous to a human Web user accessing the
+		home page of a website, a REST client should then be able to use server-provided links dynamically
+		to discover all the available actions and resources it needs. As access proceeds, the server responds
+		with text that includes hyperlinks to other actions that are currently available.
+		There is no need for the client to be hard-coded with information regarding the structure or dynamics
+		of the REST service.[
+   
+    Stateless: No state stored on server.
+   
+    Client Server: Client and server are disconnected system (when data is not being transferred)
+				 Separations of concerns -> Client handles GUI, Server handles data storage.
+				 Interface between client and server is the HTTP protocol.
+   
+    Cacheable: Responses must, implicitly or explicitly, define themselves as cacheable,
+			  or not, to prevent clients from reusing stale or inappropriate data in response
+			  to further requests
+			  
+	Code on demand (optional): Servers can temporarily extend or customize the functionality of a client
+							   by the transfer of executable code. Examples of this may include compiled
+							   components such as Java applets and client-side scripts such as JavaScript.
+   
+3) Compliance with REST constraints allows: Scalability, Simplicity, Modifiability, Visibility, Portability, Reliability.
+
