@@ -93,7 +93,33 @@ Application -> Entity Framework -> ADO.NET -> SQL Database ->
 	web.config:
 		<add key="DatabaseInitializerForType CodeFirst.DAL.ExamContext, CodeFirst" value="CodeFirst.DAL.ExamContextInitializer, CodeFirst" /> 
 		
-11) Use migrations instead.
+11) Use migrations.
+	Uncomment or delete the Initializer element in Web.config file.
+
+	PM> enable-migrations
+	PM> add-migration InitialCreate
+	PM> update-database ...
+
+	PM> add-migration EmployeeTableCreate
+	PM> update-database
+
 
 
 15) Fluent API.
+	Property Mapping
+	Type Mapping
+	Configuring Relationships
+
+	I Context:
+	Maximum length of a property: modelBuilder.Entity<Department>().Property(t => t.Name).HasMaxLength(50);
+	Required property: modelBuilder.Entity<Department>() .Property(t => t.Name).IsRequired();
+	ColumnType: modelBuilder.Entity<Invoice>().Property(p => p.OrderDate).HasColumnType("datetime2");
+
+16) Logging SQL.
+	<interceptors>
+		<interceptor type="System.Data.Entity.Infrastructure.Interception.DatabaseLogger, EntityFramework">
+			<parameters>
+				<parameter value="C:\Temp\LogSQLOutput.txt"/>
+			</parameters>
+		</interceptor>
+	</interceptors>
