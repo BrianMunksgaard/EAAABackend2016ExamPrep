@@ -1,0 +1,38 @@
+ASP.NET MVC, Visual Studio, and C# Language (foundation)
+[Freeman] chap 1, 2 (pp. 11- 36), 14
+[PowerPoint] Lesson 1, ASP.NET MVC
+Keywords: ASP.NET MVC, Visual Studio, variables, data types, assignment, type conversion, DateTime and
+TimeSpan, namespace, if-statement, for-loops, foreach.
+
+Solution: ExamCategoryOne
+
+
+
+Data-types:
+- Value types: 
+Type	Represents														Range														Default value
+bool	Boolean value													True or False												False
+byte	8-bit unsigned integer											0 to 255													0
+char	16-bit Unicode character										U +0000 to U +ffff											'\0'
+decimal	128-bit precise decimal values with 28-29 significant digits	(-7.9 x 1028 to 7.9 x 1028) / 100 to 28						0.0M
+double	64-bit double-precision floating point type						(+/-)5.0 x 10-324 to (+/-)1.7 x 10308						0.0D
+float	32-bit single-precision floating point type						-3.4 x 1038 to + 3.4 x 1038									0.0F
+int		32-bit signed integer type										-2,147,483,648 to 2,147,483,647								0
+long	64-bit signed integer type										-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807		0L
+sbyte	8-bit signed integer type										-128 to 127													0
+short	16-bit signed integer type										-32,768 to 32,767											0
+uint	32-bit unsigned integer type									0 to 4,294,967,295											0
+ulong	64-bit unsigned integer type									0 to 18,446,744,073,709,551,615								0
+ushort	16-bit unsigned integer type									0 to 65,535													0
+
+- Reference types: 
+string: Any type of string
+object: The base class of all data types in c#. Can hold any type of value or object. However before the value can be used it has to be converted to the proper type.
+	- The conversion of objects between types are called boxing and unboxing. Boxing when being converted to a super class, unboxing when being converted to the correct sub-class.
+dynamic: Can hold any type of value
+
+object and dynamic are similar except the value of object type variables are type checked during compile time whereas dynamic type variables are type checked during runtime. 
+
+- Pointer types: 
+Pointer type variables store the memory address of another type. Pointers in C# have the same capabilities as the pointers in C or C++.
+int* intPointer;

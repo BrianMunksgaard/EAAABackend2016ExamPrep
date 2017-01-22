@@ -1,0 +1,70 @@
+Model Binding
+[Freeman] chap. 15, 16 (pp. 415-29), 24
+[PowerPoint] Lesson 6, URL Routing, Outgoing URLs in Views, and Model binding
+Keywords: Model Binding, The Binding Process, Binding to complex and simple types.
+
+Solution: ExamCategoryFive + SecondMandatoryAssignment (MbmStore.Infrastructure.Binders.CartModelBinder)
+
+The binding process:
+The default action invoker will use the routeconfig to figure out which method to call.
+The default action invoker will then rely on the model binders to generate the data object that is required.
+
+Example:
+/Home/Index/1
+
+The action invoker will examine the Index method and find that it has one int parameter. It would then locate the binder responsible for int values and call its BindModel method.
+The model binder is responsible for providing an int value that can be used to call the Index method. This usually means transforming some element of the request data (such as form or query string values), but the MVC Framework doesn't put any limits on how the data is obtained.
+
+
+DefaultModelBinder:
+Looking for parameters in following places and order:
+- Request.Form[""] -> Culture-sensitive parsing
+- RouteData.Values[""] -> Culture-insensitive parsing
+- Request.QueryString[""] -> Culture-insensitive parsing
+- Request.Files[""]
+
+
+Binding to simple types:
+The DefaultModelBinder will try and convert the string value to the proper type by using the System.ComponentModel.TypeDescriptor class. If this cannot be done, the DefaultModelBinder will not be able to bind to the model.
+If the method is using a nullable type (Index(int? id)) then the error message will be "cleaner" or you could specify a default value for the parameters (Index(int id = 1)). This default value will be used in case of a null value. Giving a string value as input for a method taking an int parameter will result in a null value inside the method.
+
+
+Binding to complex types:
+Any type that cannot be converted using the TypeConverter class.
+The DefaultModelBinder uses reflection to obtain the set of public properties and then binds to each of them in turn. If the complex type includes other complex types, the ModelBinder will use prefixes to find the correct values.
+
+
+Binding to Arrays and Collections:
+If the method takes an Array as parameter, the ModelBinder will look for fields named as the parameter and create an array with those values.
+The same goes for Collections, also for collections of Customer Model Types.
+
+
+Manually Invoking ModelBinding:
+By using UpdateModel(modelToUpdate) or UpdateModel(modelToUpdate, ValueProvider). The second method will only look for values in the specified ValueProvider.
+You could handle binding errors either by a Try-Catch or by using the TryUpdateModel() versions of the methods.
+The ValueProviders are:
+Request.Form		FormValueProvider
+RouteData.Values	RouteDataValueProvider
+Request.QueryString	QueryStringValueProvider
+Request.Files		HttpFileCollectionValueProvider
+
+
+ErrorHandling in ModelBinding:
+When using automatic ModelBinding, check for errors by looking at ModelState.IsValid. When manually invoking the ModelBinding, you use TryUpdateModel or a Try-Catch.
+
+
+Custom Value Provider (page 700-704):
+The class should implement the IValueProvider interface.
+It should implement the methods public bool ContainsPrefix(string prefix) and public ValueProviderResult GetValue(string key).
+
+Custom model binding (page 704-708):
+The class should implement the IModelBinder interface.
+It should implement the method public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+
+
+Bind attribute:
+public void Method([Bind(Prefix="id") int restaurantId] -> This will tell the routing and binders that the value for "restaurantId" should come from the parameter "id" in the route. This could also be used for specifying prefixes used inside forms to make sure that mapping between 2 models will work. (see page 689-690)
+
+public void Method([Bind(Exclude="CPR")] Customer customer) -> This will result in the field CPR not being bound in the Customer object. That means a malicious user cannot send that information and expect it to be stored in the database. This is equivalent to a blacklist of fields.
+
+public void Method([Bind(Include="ID, Name, Description")] Restaurant restaurant) -> This will make sure that only the fields specified in the Include-list will be mapped as part of the model binding. This is the same as a whitelist of fields.
