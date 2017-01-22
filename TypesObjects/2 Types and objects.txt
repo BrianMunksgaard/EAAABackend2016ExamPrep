@@ -1,0 +1,26 @@
+Types, Objects
+[Object-oriented programming in C#]
+[PowerPoint] Lesson 2-3, Object oriented programming 1-2
+Keywords: class, class declaration, object, fields, properties, methods, parameters, method overloading,
+constructor, static members, inheritance, casting objects.
+
+Solution: ExamCategoryTwo
+
+
+Casting objects:
+Boxing/Unboxing
+
+Access modifiers:
+Private: Can only be accessed in the same class or struct.
+Protected: Can only be accessed in the same class or struct, or in a class that derives from this class.
+Public: Can be accessed by any other code.
+Internal: Can only be accessed from code inside the same assembly.
+
+Static: A class that cannot be instantiated. You cannot "new it up". Can only contain static methods. Is sealed
+Final: 
+
+Sealed: A class that cannot be inherited or a class member that were previously marked virtual. A sealed method cannot be overridden in derived classes.
+Abstract: A class or class member that is incomplete and must be implemented in a derived class.
+Virtual: A method that can be overriden in derived classes.
+
+void: A method that doesn't return any values.
