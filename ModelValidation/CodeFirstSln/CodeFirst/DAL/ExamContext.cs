@@ -57,11 +57,15 @@ namespace CodeFirst.DAL
             {
                 new Student
                 {
-                    StudentName = "Brian Munksgaard"
+                    StudentName = "Brian Munksgaard",
+                    ZipCode = 7430,
+                    City = "Ikast"
                 },
                 new Student
                 {
-                    StudentName = "Jens Christian Rasch"
+                    StudentName = "Jens Christian Rasch",
+                    ZipCode = 7430,
+                    City = "Ikast"
                 }
             };
 

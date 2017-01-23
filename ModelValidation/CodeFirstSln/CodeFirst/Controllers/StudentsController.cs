@@ -47,7 +47,7 @@ namespace CodeFirst.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentId,StudentName")] Student student)
+        public ActionResult Create([Bind(Include = "StudentId,StudentName,ZipCode")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace CodeFirst.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudentId,StudentName")] Student student)
+        public ActionResult Edit([Bind(Include = "StudentId,StudentName,ZipCode")] Student student)
         {
             if (ModelState.IsValid)
             {

@@ -23,5 +23,15 @@ namespace CodeFirst.Models
         /// The name of the student.
         /// </summary>
         public string StudentName { get; set; }
+
+        /// <summary>
+        /// Student zip code.
+        /// </summary>
+        public int ZipCode { get; set; }
+
+        /// <summary>
+        /// Student city.
+        /// </summary>
+        public string City { get; set; }
     }
 }
