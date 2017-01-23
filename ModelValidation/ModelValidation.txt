@@ -1,11 +1,27 @@
 Model Validation.
 
-1) Techniques:
-	Server side validation:
-		Explicit model validation (in action method if xx=="123").
-		Property validation attributes with data annotations in model classes.
-			[Required]
-			public string Name {get; set; }
+1) Server side and/or client side.
+	
+2) Server side validation:
+	* Explicit model validation (in action method if xx=="123").
+		if (string.IsNullOrEmpty(Student.StudentName))
+		{
+			ModelState.AddModelError("StudentName", "Please enter your name"); // name of prop.
+		}
+		if (ModelState.IsValid)
+		{
+			db.Students.Add(student);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+		} 
+		else
+		{
+			return View(student);
+		}
+
+	* Property validation attributes with data annotations in model classes.
+		[Required]
+		public string Name {get; set; }
 		
 			  
 			  
@@ -19,3 +35,31 @@ Model Validation.
 		
 		public ActionResult Edit([Bind(Include = "StudentId,StudentName,ZipCode")] Student student)
 		
+3) Validation error messages:
+	Model level: @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	Property level:
+		@Html.EditorFor(model => model.StudentName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.StudentName, "", new { @class = "text-danger" })
+
+4) Property validation attributes:
+	Built-in: 	Compare 			[Compare("OtherProperty")]
+				Range				[Range(10, 20)]
+				RegularExpression	[RegularExpression("Pattern")]
+				Required			[Required]
+				StringLength		[StringLength(10)]
+				
+5) Validation rules are enforced anywhere that the binding process is applied throughout the application,
+   not just in a single action method.
+   
+6) RegularExpressions:
+	Pattern recognition, literals/ordinary characters, meta characters (\d = Any number).
+	
+	Email address \S+@\S+\.\S{2,3} Check for @ and . and allow only nonwhitespace characters Password \w+ Allow only word characters (letters, numbers and underscore) Password \w{6,12} The same as previous but min. 6, max. 12 chatacters Password [a-zA-Z]\w*\d+\w* Stats with a-z or A-Z contains word characters and one number at least Phone \+{0,1}[\d\s]{8,14} Might start with +. 8 -14 numbers and whitespaces are allowed
+
+7) Custom property validation attributes: public class MyAttribute : ValidationAttribute
+   Custom model validation attribute: public class ModelAttribute : ValidationAttribute.
+   Property validation kører før model validation.
+   
+8) Client side validation.
+
+9) Remote validation.
