@@ -66,5 +66,24 @@ Client-Side Validation and Unobtrusive JavaScript validation, Remote Validation.
    Property validation kører før model validation.
    
 8) Client side validation.
+	Enabling client-side validation -> 2 settings in web.config:
+		<appSettings>
+			<add key="ClientValidationEnabled" value="true"/>
+			<add key="UnobtrusiveJavaScriptEnabled" value="true"/>
+		</appSettings>
+	Client-side validation can also be enabled per view basis by setting the HtmlHelper.ClientValidationEnabled and HtmlHelper.UnobtrusiveJavaScriptEnabled in a Razor code block.
+
+	You also need some NuGet Packages for jQuery validation and unobtrusive javascript.
+	install-package jQuery
+	install-package jQuery.validation
+	install-package Microsoft.jQuery.Unobtrusive.Validation
+
+	These should be added to the view or the shared layout as script-tags.
+
+	Unobtrusive jQuery validation means that the code you write will not be "polluted" by some external validation code. All validation will be handled by adding some data- attributes to the HTML and then the packages/libraries will handle the logic.
 
 9) Remote validation.
+	You create an action in a controller where you set the return value as JsonResult and take the value to be validated as an input parameter.
+	The return statments for the action should either be like: return Json("", JsonRequestBehavior.AllowGet); or return Json(true, JsonRequestBehavior.AllowGet);
+	
+	In the model containing the property to be validated, the property should have added an attribute like: [Remote("MethodName", "ControllerName")]
