@@ -49,6 +49,12 @@ namespace CodeFirst.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "StudentId,StudentName,ZipCode")] Student student)
         {
+            // Explicit validation.
+            if(string.IsNullOrEmpty(student.StudentName))
+            {
+                ModelState.AddModelError("StudentName", "Please enter your name.");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Students.Add(student);
@@ -70,6 +76,7 @@ namespace CodeFirst.Controllers
             if (student == null)
             {
                 return HttpNotFound();
+
             }
             return View(student);
         }
@@ -81,6 +88,12 @@ namespace CodeFirst.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "StudentId,StudentName,ZipCode")] Student student)
         {
+            // Explicit validation.
+            if (string.IsNullOrEmpty(student.StudentName))
+            {
+                ModelState.AddModelError("StudentName", "Please enter your name.");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(student).State = EntityState.Modified;
