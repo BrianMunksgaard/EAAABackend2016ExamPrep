@@ -1,0 +1,67 @@
+Composing User Interfaces with ASP.NET MVC
+[Freeman] pp. 20 (pp. 568-585)
+[PowerPoint] Lesson 7, Views
+Keywords: Views, Strongly Typed Views, Layout files, Sections, Partial Views, Child Actions, Child Action
+Methods, Areas.
+
+Solution: 
+
+
+1) Views
+	Default order when searching for views:
+		~/Views/<ControllerName>/<ActionMethodName>.cshtml
+		~/Views/<ControllerName>/<ActionMethodName>.vbhtml
+		~/Views/Shared/<ActionMethodName>.cshtml
+		~/Views/Shared/<ActionMethodName>.vbhtml
+	These can be changed by creating a subclass of RazorViewEngine (creating your own ViewEngine) See table 20-4 in book.
+	
+	
+
+2) Strongly Typed Views
+	Strongly typed views are views where you specify the model that the view will be using/working on. You do this by setting the "@model MbmStore.Models.Book" as one of the first lines in the file.
+	
+	By doing so the rest of the Razor code in the view can then refer to the Model and will automatically know that it is a Book that is the Model for the page.
+
+3) Layout files
+	Layout files are used for creating a common layout used throughout the views of the MVC website.
+
+4) Sections
+	Sections are a region of content within a layout/view. 
+	You define a section like:
+		@section Header {
+			<div class="view">
+				My Header
+			</div>
+		}
+	And you use it in the _Layout.cshtml file like:
+		@RenderSection("Header")
+	In the _Layout.cshtml you can check whether a section exists or not by using IsSectionDefined("Footer") which will return either true or false.
+	You can also specify that a section is optional by adding true or false as a second parameter to the RenderSection call: @RenderSection("Footer", false)
+
+5) Partial Views
+	Partial Views is a way of creating smaller pieces of HTML and Razor code that will be reused different places around the website. Instead of having the same code in multiple files, you can create partial views that can be reused.
+	
+	A partial view will only contain the HTML and Razor code needed to render that specific part of the page.
+	
+	When rendering a partial view from within a Layout file or another view, you use @Html.Partial("<ViewName>"). If working with strongly typed partial views, you add the model as the second parameter: @Html.Partial("<ViewName>", Model)
+	
+	The action in the controller that returns a partial view should have it's return value as ActionResult or PartialViewResult and use the return PartialView();
+
+6) Child Actions
+	Child Actions are to Actions what Partial Views are to Views.
+	
+	You render an action by using @Html.Action("<ActionName>", "<ControllerName>")
+
+7) Child Action Methods
+	You annotate the action with [ChildActionOnly] to specify that this action can only be called from within a view. That will ensure that a user cannot call the child action via a URL.
+
+8) Areas
+	Areas are used for dividing the website into logical segments (like administration, users or intranet).
+	Each area has its own folder structure with controllers, models and views.
+	Access to the areas are supported through the routing system.
+	
+	AdminAreaRegistration.cs contains a method RegisterArea that registers the route for the area.
+	Requires that the Global.asax has the following line: AreaRegistration.RegisterAllAreas();
+	If multiple routes have the same name, you can add a namespace to the route registration, or just make sure the names are unique.
+	
+	You can link to an area like this: @Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, { @class="menu" })

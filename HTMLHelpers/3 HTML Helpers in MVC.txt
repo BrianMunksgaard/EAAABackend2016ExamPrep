@@ -7,116 +7,114 @@ and Lists for dropdown lists, Templated Helper Methods, Model Metadata
 Solution: Lesson 10
 
 Form Helper Methods:
-@using(Html.BeginForm()) {
-}
+	@using(Html.BeginForm()) {
+	}
 
-BeginForm()
-BeginForm(action, controller)
-BeginForm(action, controller, method)
-BeginForm(action, controller, method, attributes)
-BeginForm(action, controller, routeValues, method, attributes)
+	BeginForm()
+	BeginForm(action, controller)
+	BeginForm(action, controller, method)
+	BeginForm(action, controller, method, attributes)
+	BeginForm(action, controller, routeValues, method, attributes)
 
-@{Html.BeginForm();}
-@{Html.EndForm();}
+	@{Html.BeginForm();}
+	@{Html.EndForm();}
 
 
 Input HTML Helpers:
-@Html.CheckBox
-Hidden
-RadioButton
-Password
-TextArea
-TextBox
+	@Html.CheckBox
+	Hidden
+	RadioButton
+	Password
+	TextArea
+	TextBox
 
 Strongly Typed Input HTML Helpers:
-@Html.CheckBoxFor and the same as the ordinary Input HTML Helpers.
+	@Html.CheckBoxFor and the same as the ordinary Input HTML Helpers.
 
 SelectListItem & DropDown Lists:
-@Html.DropDownList("myList", new SelectList(new [] {"A", "B"}), "Choose")
-@Html.DropDownListFor("x => x.Gender, new SelectList(new [] {"M", "F"}))
-ListBox("myList", new MultiSelectList(new [] {"A", "B"}))
-ListBoxFor(x => x.Vals, new MultiSelectList(new [] {"A", "B"}))
+	@Html.DropDownList("myList", new SelectList(new [] {"A", "B"}), "Choose")
+	@Html.DropDownListFor("x => x.Gender, new SelectList(new [] {"M", "F"}))
+	ListBox("myList", new MultiSelectList(new [] {"A", "B"}))
+	ListBoxFor(x => x.Vals, new MultiSelectList(new [] {"A", "B"}))
 
 
 Inline helper methods:
-Are created inside a HTML page.
-Using the @helper syntax:
-	@helper ListArrayItems(string[] items) {
-		foreach(string str in item) {
-			<b>@str</b>
+	Are created inside a HTML page.
+	Using the @helper syntax:
+		@helper ListArrayItems(string[] items) {
+			foreach(string str in item) {
+				<b>@str</b>
+			}
 		}
-	}
-	
-	<div>@ListArrayItems(ViewBag.Books)</div>
+		
+		<div>@ListArrayItems(ViewBag.Books)</div>
 
 	
 External Helper Methods:
-Inline helpers can only be used inside the page where they are created. External Helper Methods are created in a seperate file and can therefore be reused.
-This is an extension method and can be created like:
-	public static MvcHtmlString ListArrayItems(this HtmlHelper html, string[] list) {
-		TagBuilder tag = new TagBuilder("ul");
-		
-		foreach(string str in list) {
-			TagBuilder itemTag = new TagBuilder("li");
-			itemTag.SetInnerText(str);
-			tag.InnerHtml += itemTag.ToString();
+	Inline helpers can only be used inside the page where they are created. External Helper Methods are created in a seperate file and can therefore be reused.
+	This is an extension method and can be created like:
+		public static MvcHtmlString ListArrayItems(this HtmlHelper html, string[] list) {
+			TagBuilder tag = new TagBuilder("ul");
+			
+			foreach(string str in list) {
+				TagBuilder itemTag = new TagBuilder("li");
+				itemTag.SetInnerText(str);
+				tag.InnerHtml += itemTag.ToString();
+			}
+			
+			return new MvcHtmlString(tag.ToString());
 		}
+
+	Properties Defined by the HtmlHelper Class:
+		RouteCollection
+		ViewBag
+		ViewContext
 		
-		return new MvcHtmlString(tag.ToString());
-	}
-
-Properties Defined by the HtmlHelper Class:
-	RouteCollection
-	ViewBag
-	ViewContext
-	
-Properties defined by the ViewContext class:
-	Controller
-	HttpContext
-	IsChildAction
-	RouteData
-	View
-	
-Beware of encoding of text being returned from an External Helper Method!
-	- html.Encode(msg)
-
-
+	Properties defined by the ViewContext class:
+		Controller
+		HttpContext
+		IsChildAction
+		RouteData
+		View
+		
+	Beware of encoding of text being returned from an External Helper Method!
+		- html.Encode(msg)
 
 
 Templated Helper Methods:
-Html.Editor / Html.EditorFor
-Html.Label / Html.LabelFor
-Html.Display / Html.DisplayFor
-Html.DisplayForModel, EditorForModel, LabelForModel (Whole-Model Templated Helpers)
+	Html.Editor / Html.EditorFor
+	Html.Label / Html.LabelFor
+	Html.Display / Html.DisplayFor
+	Html.DisplayForModel, EditorForModel, LabelForModel (Whole-Model Templated Helpers)
 
-The whole-model helpers will only work automatically with simple types. Complex types will need to be handled manually (See page 639 in the book)
+	The whole-model helpers will only work automatically with simple types. Complex types will need to be handled manually (See page 639 in the book)
 
 
 Custom editor templates:
-The MVC Framework will look in /Views/Shared/EditorTemplates folder for these.
-Example:
-	@model HelperMethods.Models.Role 
-	@Html.DropDownListFor( m = > m, new SelectList( Enum.GetNames( Model.GetType()), Model.ToString()))
-This will be used everytime a templated helper method is used to generate an editor for the Role type.
-Sequence for finding a template:
-1) Template passed to the helper
-2) Any template the is specified by metadata attributes such as UIHint
-3) The template associated with any data type specified by metadata, such as the DataType attribute.
-4) Any template thta corresponds to the .NET class name of the data type being processed.
-5) The built-in String template if the data type being processed is a simple type.
-6) Any template that corresponds to the base classes of the data type.
-7) If the data type implements IEnumerable, then the built-in Collection template will be used.
-8) If all else fails, the Object template will be used.
-	
-You can also create generic templates (See page 641 in the book)
+	The MVC Framework will look in /Views/Shared/EditorTemplates folder for these.
+	Example:
+		@model HelperMethods.Models.Role 
+		@Html.DropDownListFor( m = > m, new SelectList( Enum.GetNames( Model.GetType()), Model.ToString()))
+	This will be used everytime a templated helper method is used to generate an editor for the Role type.
+	Sequence for finding a template:
+	1) Template passed to the helper
+	2) Any template the is specified by metadata attributes such as UIHint
+	3) The template associated with any data type specified by metadata, such as the DataType attribute.
+	4) Any template thta corresponds to the .NET class name of the data type being processed.
+	5) The built-in String template if the data type being processed is a simple type.
+	6) Any template that corresponds to the base classes of the data type.
+	7) If the data type implements IEnumerable, then the built-in Collection template will be used.
+	8) If all else fails, the Object template will be used.
+		
+	You can also create generic templates (See page 641 in the book)
 	
 Model MetaData:
-HiddenInput vs. HiddenInput(DisplayValue=false) vs. ScaffoldColumn(false)
-Will show the value but no entry vs. Will not show the value either vs. Will not even create a hidden field with the value (as the two other options will)
+	HiddenInput vs. HiddenInput(DisplayValue=false) vs. ScaffoldColumn(false)
+	Will show the value but no entry vs. Will not show the value either vs. Will not even create a hidden field with the value (as the two other options will)
 
-Display(Name=""): Will show this text instead of the property name.
-DataType(DataType.Date): Will set the datatype for the input field.
-UIHint(<value>): Will tell the HTML which type of data should be possible to input in an entry field.
+	Display(Name=""): Will show this text instead of the property name.
+	DataType(DataType.Date): Will set the datatype for the input field.
+	UIHint(<value>): Will tell the HTML which type of data should be possible to input in an entry field.
 
-You could add the metadata in a Buddy Class instead of directly in the model. This is especially useful when working with ORM's since they might change/update the content of the model classes.
-You create a Buddy class by make a partial class containing the properties and the MetaData annotations. Then you annotate the ModelClass with [MetadataType(typeof(BuddyClassName))]
+	You could add the metadata in a Buddy Class instead of directly in the model. This is especially useful when working with ORM's since they might change/update the content of the model classes.
+	You create a Buddy class by make a partial class containing the properties and the MetaData annotations. Then you annotate the ModelClass with [MetadataType(typeof(BuddyClassName))]
