@@ -3,7 +3,7 @@ Model Binding
 [PowerPoint] Lesson 6, URL Routing, Outgoing URLs in Views, and Model binding
 Keywords: Model Binding, The Binding Process, Binding to complex and simple types.
 
-Solution: ExamCategoryFive + SecondMandatoryAssignment (MbmStore.Infrastructure.Binders.CartModelBinder)
+Solution: SecondMandatoryAssignment (MbmStore.Infrastructure.Binders.CartModelBinder)
 
 The binding process:
 	The default action invoker will use the routeconfig to figure out which method to call.
@@ -60,6 +60,9 @@ Custom Value Provider (page 700-704):
 Custom model binding (page 704-708):
 	The class should implement the IModelBinder interface.
 	It should implement the method public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+	
+	In the Global.asax the customer model binder should be added through:
+	ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
 
 
 Bind attribute:

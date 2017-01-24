@@ -1,0 +1,73 @@
+URL Routing
+[Freeman] chap. 15, 16 (pp. 415-29), 24
+[PowerPoint] Lesson 6, URL Routing, Outgoing URLs in Views, and Model binding
+Keywords: User-friendly URLs, ASP.NET Routing, URL segments, Route Configuration, Route
+Constraints, Static URL Segment, Routes order in configuration file, Attribute Routing, Outgoing URLs in
+Views.
+
+Solution: Lesson 6
+
+Route patterns are conservative and will only match URLs that have the same number of segments as the pattern.
+Route patterns are liberal. If the URL has the correct number of segments, the pattern will extract the values no matter what they are.
+
+Any number of segments: /{*catchall}
+
+
+1) User-Friendly URLs
+
+
+2) ASP.NET Routing
+
+
+3) URL segments
+	http://mysite.com/Home/Index/1 => First segment=Home. Second segment=Index. Third segment=1
+	
+	
+4) Route configuration
+	App_Start/RouteConfig.cs (In an area the routes are in the <AreaName>AreaRegistration.cs in the root of the area)
+	For WebAPI: App_Start/WebApiConfig.cs.
+
+	In the Application_Start() in Global.asax:
+		RouteConfig.RegisterRoutes(RouteTable.Routes);
+		GlobalConfiguration.Configure(WebApiConfig.Register); (For using WebAPI)
+	If you want the routes for WebAPI to be used first, you should have that line as the first.
+	
+	routes.MapRoute(
+		name: "Default",
+		url: "{controller}/{action}/{id}",
+		defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+	);
+
+
+5) Route Constraints
+	routes.MapRoute(
+		name: "IdOptionalInt",
+		url: "{controller}/{action}/{id}",
+		defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+		constraints: new { id = new IntRouteConstraint() }
+		// constraints: new { id = @"\d+" }
+	);
+
+
+6) Static URL Segment
+	url: "shop/{controller}/{action}/{id}"
+	Here "shop" is a static segment in the route
+
+7) Route order in configuration file
+	The routes will be examined in the order they are listed in the RouteConfig.cs until a match is found.
+	The routes should come in the order of most specefic to least specific.
+	
+
+8) Attribute routing
+	Allows you to specify a route as an attribute for Controllers and Action methods. Requires the following line in RouteConfig.cs:
+		routes.MapMvcAttributeRoutes();
+	In the Controller/Action method you can annotate the method with:
+		[Route("books/{isbn?}")]
+
+9) Outgoing URLs in Views
+	@Html.ActionLink("Same controller and named action", "index")
+	@Html.ActionLink("Same controller and action with URL parameters", "index", new { page=2 })
+	@Html.ActionLink("Another controller and action", "AnotherController", "AnotherAction")
+	@Html.ActionLink("Same controller with extra segment", "index", new { id="42" }, null)
+	@Html.ActionLink("Another controller with extra segment", "book", "index", new { category="Crime", title="Flaskepost fra P" }, null)
+	@Html.RouteLink("Routelink with named route" //link name, "Default" // route name, new { controller = "list", action = "index" } // controller); -> Named route link
