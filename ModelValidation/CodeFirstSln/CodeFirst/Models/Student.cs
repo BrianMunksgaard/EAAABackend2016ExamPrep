@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CodeFirst.Models
 {
@@ -35,7 +36,8 @@ namespace CodeFirst.Models
         /// </summary>
         public string City { get; set; }
 
-        [CPRAttribute(ErrorMessage = "Please enter a valid CPR number")]
+        [Remote("ValidateCPR", "Students")] // Client side.
+        [CPRAttribute(ErrorMessage = "Please enter a valid CPR number")] // Server side.
         public string CPR { get; set; }
    
     }

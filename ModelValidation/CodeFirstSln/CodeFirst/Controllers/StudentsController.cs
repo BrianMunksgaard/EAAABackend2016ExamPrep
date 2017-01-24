@@ -15,6 +15,19 @@ namespace CodeFirst.Controllers
     {
         private ExamContext db = new ExamContext();
 
+        public JsonResult ValidateCPR(string cpr)
+        {
+            if (!string.IsNullOrEmpty(cpr.ToString()))
+            {
+                if (cpr.Length == 10)
+                {
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            return Json("Please enter a valid CPR", JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Students
         public ActionResult Index()
         {

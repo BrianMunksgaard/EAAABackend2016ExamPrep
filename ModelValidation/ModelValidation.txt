@@ -95,9 +95,27 @@ Client-Side Validation and Unobtrusive JavaScript validation, Remote Validation.
 						@{ Html.EnableClientValidation(true); } 
 					   </div>
 
+					   
 	
 9) Remote validation.
 	You create an action in a controller where you set the return value as JsonResult and take the value to be validated as an input parameter.
 	The return statments for the action should either be like: return Json("", JsonRequestBehavior.AllowGet); or return Json(true, JsonRequestBehavior.AllowGet);
 	
 	In the model containing the property to be validated, the property should have added an attribute like: [Remote("MethodName", "ControllerName")]
+	
+10) Self-Validating model: implement IValidatableObject.
+		public class Student : IValidatableObject {
+			public string StudentName{ get; set; }
+			
+			public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+			{
+				List<ValidationResult> errors = new List<ValidationResult>();
+				if (string.IsNullOrEmpty(StudentName))
+				{
+					errors.Add(new ValidationResult("Please enter your name"));
+				} 
+		
+				return errors;
+			}
+		}
+		
