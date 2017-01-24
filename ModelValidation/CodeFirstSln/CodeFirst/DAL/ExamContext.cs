@@ -45,7 +45,7 @@ namespace CodeFirst.DAL
     /// <summary>
     /// Database initializer.
     /// </summary>
-    public class ExamContextInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<ExamContext>
+    public class ExamContextInitializer : System.Data.Entity.DropCreateDatabaseAlways<ExamContext>
     {
         /// <summary>
         /// Add information to the database.
@@ -59,13 +59,15 @@ namespace CodeFirst.DAL
                 {
                     StudentName = "Brian Munksgaard",
                     ZipCode = 7430,
-                    City = "Ikast"
+                    City = "Ikast",
+                    CPR = "1234567890"
                 },
                 new Student
                 {
                     StudentName = "Jens Christian Rasch",
                     ZipCode = 7430,
-                    City = "Ikast"
+                    City = "Ikast",
+                    CPR = "0123456789"
                 }
             };
 

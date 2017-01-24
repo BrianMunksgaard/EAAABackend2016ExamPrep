@@ -79,9 +79,23 @@ Client-Side Validation and Unobtrusive JavaScript validation, Remote Validation.
 	install-package Microsoft.jQuery.Unobtrusive.Validation
 
 	These should be added to the view or the shared layout as script-tags.
-
+		<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+		<script src="~/Scripts/jquery.validate.min.js"></script>
+		<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+	
 	Unobtrusive jQuery validation means that the code you write will not be "polluted" by some external validation code. All validation will be handled by adding some data- attributes to the HTML and then the packages/libraries will handle the logic.
 
+	Client-Side validation can be disabled:
+		* Application level: In web.config or globals.ascx (HtmlHelper.ClientValidationEnabled = true; HtmlHelper.UnobtrusiveJavaScriptEnabled = true;)
+		* View level: @{ ViewBag.Title = "Make A Booking"; HtmlHelper.ClientValidationEnabled = false;}
+		* Field level: <div class="editor-field">
+						@{Html.EnableClientValidation(false); }
+						@Html.TextBoxFor(m => m.PersId) 
+						// validation disabled 
+						@{ Html.EnableClientValidation(true); } 
+					   </div>
+
+	
 9) Remote validation.
 	You create an action in a controller where you set the return value as JsonResult and take the value to be validated as an input parameter.
 	The return statments for the action should either be like: return Json("", JsonRequestBehavior.AllowGet); or return Json(true, JsonRequestBehavior.AllowGet);

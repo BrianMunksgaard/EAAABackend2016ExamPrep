@@ -47,7 +47,7 @@ namespace CodeFirst.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentId,StudentName,ZipCode")] Student student)
+        public ActionResult Create([Bind(Include = "StudentId,StudentName,ZipCode,CPR")] Student student)
         {
             // Explicit validation.
             if(string.IsNullOrEmpty(student.StudentName))
@@ -86,7 +86,7 @@ namespace CodeFirst.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudentId,StudentName,ZipCode")] Student student)
+        public ActionResult Edit([Bind(Include = "StudentId,StudentName,ZipCode,CPR")] Student student)
         {
             // Explicit validation.
             if (string.IsNullOrEmpty(student.StudentName))

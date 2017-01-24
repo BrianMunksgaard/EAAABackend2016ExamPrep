@@ -149,6 +149,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="CustomValidation\CPRAttribute.cs" />
     <Compile Include="DAL\ExamContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeFirst.CustomValidation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -33,5 +34,9 @@ namespace CodeFirst.Models
         /// Student city.
         /// </summary>
         public string City { get; set; }
+
+        [CPRAttribute(ErrorMessage = "Please enter a valid CPR number")]
+        public string CPR { get; set; }
+   
     }
 }
