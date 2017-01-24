@@ -4,7 +4,7 @@ HTML Helpers in Views
 Keywords: Form Helper Methods, Input HTML Helpers, Strongly Typed Input HTML Helpers, SelectListItem
 and Lists for dropdown lists, Templated Helper Methods, Model Metadata
 
-Solution: ExamCategoryThree
+Solution: Lesson 10
 
 Form Helper Methods:
 @using(Html.BeginForm()) {

@@ -1,4 +1,9 @@
-Model Validation.
+Model Validation
+[Freeman] chap. 25
+[PowerPoint] Lesson 10, Model Validation Techniques
+Keywords: Manuel Validation, Property Validation Attributes, Displaying Validation Messages, Regular
+Expressions, Custom Property Validation Attributes, Model Validation Attributes, Self-Validating Models,
+Client-Side Validation and Unobtrusive JavaScript validation, Remote Validation.
 
 1) Techniques:
 	Server side validation:
@@ -18,4 +23,41 @@ Model Validation.
         </div>
 		
 		public ActionResult Edit([Bind(Include = "StudentId,StudentName,ZipCode")] Student student)
+
 		
+Solution: Lesson 10 (Remote validation)
+
+
+Manuel validation:
+
+
+Property Validation Attributes:
+
+
+Displaying Validation messages:
+
+
+Regular expressions:
+
+
+Custom Property Validation Attributes:
+
+
+Model Validation Attributes:
+
+
+Self-Validating Models:
+
+
+Client-Side Validation & Unobtrusive JavaScript Validation:
+Enabling client-side validation -> 2 settings in web.config:
+	<appSettings>
+		<add key="ClientValidationEnabled" value="true"/>
+		<add key="UnobtrusiveJavaScriptEnabled" value="true"/>
+	</appSettings>
+Client-side validation can also be enabled per view basis by setting the HtmlHelper.ClientValidationEnabled and HtmlHelper.UnobtrusiveJavaScriptEnabled in a Razor code block.
+
+
+
+Remote validation:
+
