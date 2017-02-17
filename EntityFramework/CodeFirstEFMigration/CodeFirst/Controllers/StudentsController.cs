@@ -18,7 +18,8 @@ namespace CodeFirst.Controllers
         // GET: Students
         public ActionResult Index()
         {
-            return View(db.Students.ToList());
+            List<Student> students = db.Students.ToList();
+            return View(students);
         }
 
         // GET: Students/Details/5

@@ -35,13 +35,15 @@ namespace CodeFirst.Migrations
                 {
                     StudentId = 1,
                     StudentName = "Brian Munksgaard",
-                    StudentBirthday = new DateTime(1969, 9, 18)
+                    StudentBirthday = new DateTime(1969, 9, 18),
+                    StreetName = "Bredskifte Alle"
                 },
                 new Student
                 {
                     StudentId = 2,
                     StudentName = "Jens Christian Rasch",
-                    StudentBirthday = new DateTime(1972, 9, 18)
+                    StudentBirthday = new DateTime(1972, 9, 18),
+                    StreetName = "Sønderhøj"
                 }
             };
 

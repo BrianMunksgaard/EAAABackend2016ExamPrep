@@ -148,7 +148,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -164,6 +166,10 @@
     <Compile Include="Migrations\201701191341073_AddedStudentBirthdayProperty.cs" />
     <Compile Include="Migrations\201701191341073_AddedStudentBirthdayProperty.Designer.cs">
       <DependentUpon>201701191341073_AddedStudentBirthdayProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701241249088_StreetNameAdded.cs" />
+    <Compile Include="Migrations\201701241249088_StreetNameAdded.Designer.cs">
+      <DependentUpon>201701241249088_StreetNameAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -198,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701191341073_AddedStudentBirthdayProperty.resx">
       <DependentUpon>201701191341073_AddedStudentBirthdayProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701241249088_StreetNameAdded.resx">
+      <DependentUpon>201701241249088_StreetNameAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

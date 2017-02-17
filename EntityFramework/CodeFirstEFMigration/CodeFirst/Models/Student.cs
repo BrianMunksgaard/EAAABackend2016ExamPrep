@@ -16,7 +16,7 @@ namespace CodeFirst.Models
         /// <summary>
         /// Unique student id.
         /// </summary>
-        //[Key] // Annotate as key if needed.
+        [Key] // Annotate as key if needed.
         //[DatabaseGenerated(DatabaseGeneratedOption.None) // Avoid auto generated key if needed.
         public int StudentId { get; set; } // Automatically recognized as primary key (Id or classnameId).
 
@@ -30,5 +30,7 @@ namespace CodeFirst.Models
         /// </summary>
         [Column(TypeName = "datetime2")]
         public DateTime StudentBirthday { get; set; }
+
+        public string StreetName { get; set; }
     }
 }
